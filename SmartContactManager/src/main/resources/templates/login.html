@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::section})}">
+<head>
+    <meta charset="utf-8">
+    <title>Login page</title>
+</head>
+<body>
+<section>
+    <div class="container">
+        <div class = "row">
+            <!--            In a row, there is 12 columns/grid,so taking 6  & offset 3 from left & right-->
+            <div class="col-md-6 offset-md-3">
+                <div class="my-card mt-3">
+<!--                    <div></div>-->
+                    <div th:if="${session.message}" th:classappend="${session.message.type}"
+                         class="alert" role="alert">
+                        <p class="text-center" th:text="${session.message.content}"></p>
+                        <th:block th:text="${@sessionHelper.removeMessageFromSession()}"></th:block>
+                    </div>
+<!--                    <div class="text-center">-->
+<!--                        <img width="80px" th:src="@{/img/sign-up-icon.png}">-->
+<!--                    </div>-->
+                    <h1 class="text-center">Login Here !!</h1>
+                    <form novalidate th:action="@{/authenticate}"  method="post" th:object="${user}>
+                        <!--                        username field-->
+                        <div class="mb-3">
+                            <label for="username_field" class="form-label">Username</label>
+                            <input type="email" class="form-control" id="username_field" aria-describedby="emailHelp"
+                                   placeholder="Enter here" required  name="username">
+
+                        </div>
+                        <!--                        password field-->
+                        <div class="mb-3">
+                            <label for="password_field" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password_field" aria-describedby="emailHelp"
+                                   placeholder="Enter here" required name="password">
+                        </div>
+                        <!--                        buttons-->
+                        <div class="container d-grid gap-2 col-6 mx-auto">
+                            <button type="submit" class="btn bg-primary text-white">Login</button>
+                            <button type="reset" class="btn btn-warning ">Reset</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>
